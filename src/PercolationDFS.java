@@ -6,7 +6,10 @@ public class PercolationDFS extends PercolationDefault {
     }
 
     public void search(int row, int col) {
-        if (!isOpen(row, col)) {
+        if (!inBounds(row, col)) {
+            return;
+        }
+         if (!isOpen(row, col) || isFull(row, col)) {
             return;
         }
 		Stack <int[]> stack = new Stack<>();
@@ -20,9 +23,10 @@ public class PercolationDFS extends PercolationDefault {
             for (int k = 0; k < rowDelta.length; k++) {
                 row = coords[0] + rowDelta[k];
                 col = coords[1] + colDelta[k];
-                if (inBounds(row,col) && isOpen(row, col)) {
-                    myGrid[row][col] = FULL;
+                if (inBounds(row,col) && myGrid[row][col] == OPEN) {
                     stack.push(new int[] {row, col});
+                    myGrid[row][col] = FULL;
+
                 }
             }
         }
