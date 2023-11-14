@@ -5,7 +5,7 @@ public class PercolationDFS extends PercolationDefault {
         super(n);
     }
 
-    public void search(int row, int col) {
+    protected void search(int row, int col) {
         if (!inBounds(row, col)) {
             return;
         }
