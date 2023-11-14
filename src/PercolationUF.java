@@ -41,7 +41,7 @@ public class PercolationUF implements IPercolate {
             for (int i = 0; i < rowDelta.length; i++) {
                 int newRow = row + rowDelta[i];
                 int newCol = col + colDelta[i];
-                if (isOpen(newRow, newCol)) {
+                if (inBounds(newRow, newCol) && isOpen(newRow, newCol)) {
                     int otherCellNum = newRow*myGrid.length+ newCol;
                     myFinder.union(cellNum, otherCellNum);
                 }
@@ -49,7 +49,7 @@ public class PercolationUF implements IPercolate {
             if (row == 0) {
                 myFinder.union(cellNum, VTOP);
             }
-            if (row == Math.sqrt(VTOP)) {
+            if (row == myGrid.length - 1) {
                 myFinder.union(cellNum, VBOTTOM);
             }
         }
